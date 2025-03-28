@@ -12,7 +12,7 @@ const fetchSiteData = async (subdomain: string) => {
   const { data, error } = await supabase
     .from("published_sites")
     .select()
-    .eq("settings->>name", "fresh")
+    .eq("settings->>name", subdomain)
     .order("created_at", { ascending: false })
     .single();
 

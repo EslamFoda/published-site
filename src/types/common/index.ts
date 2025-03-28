@@ -1,4 +1,3 @@
-import { Storage } from "@/reduxStore/types";
 import {
   Accordion,
   AccordionStyle,
@@ -11,27 +10,8 @@ import { GalleryStyle, Photo } from "../sectionsTypes/gallery";
 import { HeaderStyle, Link, SubLink } from "../sectionsTypes/header";
 import { ListItem, ListStyle } from "../sectionsTypes/list";
 import { Logo, LogosStyle } from "../sectionsTypes/logos";
-import {
-  SubscriptionPlan,
-  SubscriptionPlanItem,
-} from "../sectionsTypes/pricing";
+import { SubscriptionPlan } from "../sectionsTypes/pricing";
 import { Testimonial, TestimonialStyle } from "../sectionsTypes/testimonials";
-
-export type SelectedItemType =
-  | Card
-  | ListItem
-  | Accordion
-  | Testimonial
-  | Link
-  | Photo
-  | SubLink
-  | Logo
-  | LinkGroup
-  | SocialLink
-  | SubscriptionPlan
-  | SubscriptionPlanItem
-  | Storage
-  | null;
 
 export type DragItems =
   | Card[]

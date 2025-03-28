@@ -1,13 +1,10 @@
 import { ButtonVariantProps } from "@/components/ui/button";
-import AvatarEditor from "react-avatar-editor";
 import { Layouts } from "react-grid-layout";
 
 export interface FluidContent {
   gridLayout: Layouts;
   gridCards: GridCard[];
 }
-
-export interface DesignSettings {}
 
 export interface FluidStyle {
   designName: string;
@@ -21,7 +18,6 @@ export interface FluidStyle {
     padding: [number, number];
     rowHeight: number;
   };
-  designSettings: DesignSettings;
 }
 
 export type ButtonDisplay = "Text only" | "Icon only" | "Text and icon";
@@ -55,7 +51,6 @@ export interface FluidImageSettings {
     exposure?: number;
     zoom?: number;
     rotate?: number;
-    position?: AvatarEditor.Position;
     vintage?: number;
     grain?: number;
     sharpness?: number;
