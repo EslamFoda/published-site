@@ -11,7 +11,7 @@ function Accordion({ section }: AccordionProps) {
   };
 
   const AccordionSection =
-    designs[section.style.designName as keyof typeof designs];
+    designs[section?.style.designName as keyof typeof designs];
   return <AccordionSection section={section} />;
 }
 
