@@ -1,7 +1,7 @@
 "use client";
 
+import { SiteData } from "@/types/siteData";
 import { createContext, useContext, ReactNode } from "react";
-import { SiteData } from "@/types/section";
 
 interface SiteDataContextType {
   siteData: SiteData | null;

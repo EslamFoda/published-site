@@ -4,10 +4,10 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
 import FontLoader from "@/components/shared/fontLoader";
 import { createClient } from "@/supabase/client";
-import { SiteData } from "@/types/section";
 import useSWR from "swr";
 import { useParams } from "next/navigation";
 import { SiteDataProvider } from "@/context/SiteDataContext";
+import { SiteData } from "@/types/siteData";
 
 const fetchSiteData = async (subdomain: string) => {
   const supabase = createClient();
@@ -30,7 +30,7 @@ export default function RootLayout({
   const params = useParams();
   console.log(params, "params");
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
-  const subdomain = subdomainArray[0] || "fresh";
+  const subdomain = subdomainArray[0];
 
   const { data: siteData, error } = useSWR(subdomain, fetchSiteData, {
     revalidateOnFocus: false,

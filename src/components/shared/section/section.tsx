@@ -12,17 +12,18 @@ import Logos from "@/designs/logos";
 import Pricing from "@/designs/pricing";
 import Testimonials from "@/designs/testimonials";
 import useScrollParallax from "@/hooks/useScrollParallax";
-import { EditorPage, SectionType } from "@/types/section";
+import { SectionType } from "@/types/section";
 import ProgressBar from "../progressBar";
 import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
 import Sidebar from "../sideBar";
 import HeaderMobMenu from "../headerMobMenu";
 import { X } from "lucide-react";
 import { useMobileMenu } from "@/context/MobileMenuContext";
+import { Page } from "@/types/pages";
 
 const Section: React.FC<{
   globalSections: SectionType[] | undefined;
-  currentPage: EditorPage;
+  currentPage: Page;
 }> = ({ globalSections, currentPage }) => {
   const { ParallaxProvider } = useScrollParallax();
   const { isMobMenuOpen, setMobMenuOpen } = useMobileMenu();

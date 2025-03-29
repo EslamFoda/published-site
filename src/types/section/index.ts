@@ -51,7 +51,7 @@ export type SectionStyleTypes = {
 };
 
 // Define the type for a single editor section
-export interface EditorSection<
+export interface Section<
   T extends keyof SectionContentTypes,
   U extends keyof SectionStyleTypes
 > {
@@ -61,112 +61,6 @@ export interface EditorSection<
   style: SectionStyleTypes[U];
 }
 
-// Define the type for the editor's state in the store
-export interface EditorStore {
-  editor: {
-    pages: EditorPage[]; // Add this line to include pages in the editor
-  };
-  sectionIndex: number;
-  selectedSection: EditorSection<
-    keyof SectionContentTypes,
-    keyof SectionStyleTypes
-  > | null;
-  selectedPallet: string;
-  designSettings: DesignSettings;
-  settings: SiteSettings;
-  globalSections: EditorSection<
-    keyof SectionContentTypes,
-    keyof SectionStyleTypes
-  >[];
-  storage: Storage[];
-}
-
-export interface Storage {
-  id: string;
-  url: string;
-  publicId: string;
-}
-
-export type DraggableModalName = "SETTINGS" | "LAYOUT";
-
-// Define the type for an editor page
-export interface EditorPage {
-  pageId: string;
-  sections:
-    | EditorSection<keyof SectionContentTypes, keyof SectionStyleTypes>[]
-    | undefined;
-  pageSettings: PageSettings;
-}
-
-// Define the type for page settings
-export interface PageSettings {
-  coverImage: string;
-  description: string;
-  isPublished: boolean;
-  isVisibleInSearch: boolean;
-  link: string;
-  pagePasswordButton: string;
-  seoTitle: string;
-  showFooter: boolean;
-  showHeader: boolean;
-  title: string;
-  userEditedSlug: boolean;
-}
-
-// Define the type for design settings
-export interface DesignSettings {
-  fonts: Fonts;
-  colors: {
-    primary: string;
-    primaryForGround: string;
-  };
-  borderRadius: string;
-  width: {
-    pages: number;
-    fullWidthPage: boolean;
-  };
-}
-
-export interface Fonts {
-  titleFont: FontSettings;
-  bodyFont: FontSettings;
-}
-
-// Define the type for font settings
-export interface FontSettings {
-  fontFamily: string;
-  fontWeight: string;
-  fontFamilyUrl: string;
-}
-
-export interface SiteSettings {
-  email: string | undefined;
-  favicon: string;
-  homePage: string;
-  isTemplate: boolean;
-  showMadeBy: boolean;
-  name: string;
-  link: string;
-  siteId: string;
-  published: boolean;
-  owner_id: string;
-}
-
 export type SectionType =
-  | EditorSection<keyof SectionContentTypes, keyof SectionStyleTypes>
+  | Section<keyof SectionContentTypes, keyof SectionStyleTypes>
   | undefined;
-
-export interface SiteData {
-  created_at: string;
-  globalSections: EditorSection<
-    keyof SectionContentTypes,
-    keyof SectionStyleTypes
-  >[];
-  designSettings: DesignSettings;
-  siteSettings: SiteSettings;
-  id: number;
-  owner_id: string;
-  pages: EditorPage[];
-  selectedPallet: string;
-  settings: SiteSettings;
-}

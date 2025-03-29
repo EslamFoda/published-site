@@ -3,7 +3,7 @@
 import Section from "@/components/shared/section";
 import { MobileMenuProvider } from "@/context/MobileMenuContext";
 import { useSiteData } from "@/context/SiteDataContext";
-import { EditorPage } from "@/types/section";
+import { Page } from "@/types/pages";
 import { useParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -11,8 +11,8 @@ export default function SubdomainPage() {
   const params = useParams();
   const pageContainerRef = useRef<HTMLDivElement>(null);
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
-  const subdomain = subdomainArray[0] || "fresh";
-  const route = subdomainArray[1] || "home";
+  const subdomain = subdomainArray[0];
+  const route = subdomainArray[1] || "/";
 
   const { siteData, error } = useSiteData();
   const designSettings = siteData?.designSettings;
@@ -51,9 +51,8 @@ export default function SubdomainPage() {
   if (!siteData) return null;
 
   const currentPage =
-    siteData.pages.find(
-      (page: EditorPage) => page.pageSettings.link === route
-    ) || null;
+    siteData.pages.find((page: Page) => page.pageSettings.link === route) ||
+    null;
 
   if (!currentPage) {
     return (
