@@ -10,11 +10,11 @@ function HeaderMobMenu({ headerContent }: HeaderMobMenuProps) {
     <div>
       {headerContent.links.map((link) => (
         <div key={link.id}>
-          <div className="p-3 border-b border-muted-bg">
+          <div className="px-3 py-4 border-b border-muted-bg">
             <HeaderLink link={link} />
           </div>
           {link.subLinks.map((subLink) => (
-            <div key={subLink.id} className="p-3 px-6 border-b border-muted-bg">
+            <div key={subLink.id} className="py-4 px-6 border-b border-muted-bg">
               <HeaderLink link={subLink} />
             </div>
           ))}

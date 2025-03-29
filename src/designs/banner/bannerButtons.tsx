@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useSiteData } from "@/context/SiteDataContext";
 import { cn } from "@/lib/utils";
 import { ButtonTypes, SectionBgColorType } from "@/types/common";
 import { useRouter } from "next/navigation";
@@ -18,11 +19,12 @@ function BannerButtons({
   sectionBackground = "none",
 }: BannerButtonsProps) {
   const router = useRouter();
-
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
   const handleButtonClick = (button: ButtonTypes) => {
     if (button.linkType === "internal" && button.pageId) {
       // Use router.push for internal Next.js navigation
-      router.push(`${button.link}`);
+      router.push(homePageId === button.pageId ? "/" : button.link);
       return;
     }
 

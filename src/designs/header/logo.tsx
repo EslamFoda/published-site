@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { HeaderLogo } from "@/types/sectionsTypes/header";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface LogoProps {
   logoType: string;
@@ -28,6 +29,8 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
   const { theme } = useTheme();
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
 
   const imageLogoClassNames = cn(className, {
     "cursor-pointer": logo.externalLink,
@@ -120,7 +123,11 @@ const Logo: React.FC<LogoProps> = ({
 
   // Only use Link for internal links with a valid logo.pageId
   if (logo.linkType === "internal" && logo.pageId) {
-    return <Link href={`${logo.link}`}>{logoContent()}</Link>;
+    return (
+      <Link href={homePageId === logo.pageId ? "/" : logo.link}>
+        {logoContent()}
+      </Link>
+    );
   }
 
   // Fallback for any other cases

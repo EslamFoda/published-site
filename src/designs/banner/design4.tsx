@@ -12,16 +12,16 @@ import BackgroundImage from "@/components/shared/backgroundImage";
 import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
 import DesignLabel from "@/components/shared/label";
 import { SectionType } from "@/types/section";
-import { useGlobalSections } from "@/context/GlobalSectionsContext";
 import { SectionBackground } from "@/types/common";
+import { useSiteData } from "@/context/SiteDataContext";
 interface Design4Props {
   section: SectionType;
   sectionIndex: number;
 }
 function Design4({ section, sectionIndex }: Design4Props) {
-  const { globalSections } = useGlobalSections();
+  const { siteData } = useSiteData();
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
-  const globalHeader = globalSections?.find(
+  const globalHeader = siteData?.globalSections?.find(
     (section) => section.sectionName === "Header"
   );
   const headerStyle = globalHeader?.style as HeaderStyle;

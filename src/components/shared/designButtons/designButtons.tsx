@@ -1,12 +1,12 @@
-// components/DesignButtons.tsx
 import { Button } from "@/components/ui/button";
+import { useSiteData } from "@/context/SiteDataContext";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 interface ButtonConfig {
   text: string;
-  link?: string;
+  link: string;
   pageId?: string;
   variant?: "default" | "secondary" | "outline" | "ghost";
   linkType?: "internal" | "external";
@@ -28,13 +28,15 @@ function DesignButtons({
   reverse = false,
   btnClassNames,
 }: DesignButtonsProps) {
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
   const router = useRouter();
   const variants = ["default", "secondary", "outline", "ghost"] as const;
 
   const handleButtonClick = (button: ButtonConfig) => {
     if (button.linkType === "internal" && button.pageId) {
       // Use router.push for internal Next.js navigation
-      router.push(`${button.link}`);
+      router.push(homePageId === button.pageId ? "/" : button.link);
       return;
     }
 

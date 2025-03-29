@@ -12,8 +12,8 @@ import BackgroundImage from "@/components/shared/backgroundImage";
 import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
 import DesignLabel from "@/components/shared/label";
 import { SectionType } from "@/types/section";
-import { useGlobalSections } from "@/context/GlobalSectionsContext";
 import { SectionBackground } from "@/types/common";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface Design2Props {
   section: SectionType;
@@ -21,9 +21,9 @@ interface Design2Props {
 }
 
 function Design2({ section, sectionIndex }: Design2Props) {
-  const { globalSections } = useGlobalSections();
+  const { siteData } = useSiteData();
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
-  const globalHeader = globalSections?.find(
+  const globalHeader = siteData?.globalSections?.find(
     (section) => section.sectionName === "Header"
   );
   const headerStyle = globalHeader?.style as HeaderStyle;

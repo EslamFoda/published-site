@@ -1,36 +1,48 @@
 "use client";
+
 import Section from "@/components/shared/section";
-import { GlobalSectionsProvider } from "@/context/GlobalSectionsContext";
 import { MobileMenuProvider } from "@/context/MobileMenuContext";
-import { createClient } from "@/supabase/client";
-import { EditorPage, SiteData } from "@/types/section";
+import { useSiteData } from "@/context/SiteDataContext";
+import { EditorPage } from "@/types/section";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
-
-const fetchSiteData = async (subdomain: string) => {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("published_sites")
-    .select()
-    .eq("settings->>name", subdomain)
-    .order("created_at", { ascending: false })
-    .single();
-
-  if (error || !data) throw new Error("No site data found");
-  return data as SiteData;
-};
+import { useEffect, useRef } from "react";
 
 export default function SubdomainPage() {
   const params = useParams();
+  const pageContainerRef = useRef<HTMLDivElement>(null);
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
   const subdomain = subdomainArray[0] || "fresh";
   const route = subdomainArray[1] || "home";
-  console.log(subdomain, "subdomain");
 
-  const { data: siteData, error } = useSWR(subdomain, fetchSiteData, {
-    revalidateOnFocus: false,
-    dedupingInterval: 60000,
-  });
+  const { siteData, error } = useSiteData();
+  const designSettings = siteData?.designSettings;
+  const selectedPallet = siteData?.selectedPallet;
+
+  useEffect(() => {
+    if (pageContainerRef.current && designSettings) {
+      pageContainerRef.current.style.setProperty(
+        "--radius",
+        designSettings.borderRadius
+      );
+
+      if (selectedPallet === "custom") {
+        pageContainerRef.current.style.setProperty(
+          "--primary",
+          designSettings.colors.primary
+        );
+        pageContainerRef.current.style.setProperty(
+          "--primary-foreground",
+          designSettings.colors.primaryForGround
+        );
+      }
+      pageContainerRef.current.style.setProperty(
+        "--container-max-width",
+        designSettings.width.fullWidthPage
+          ? "100%"
+          : `${designSettings.width.pages}px`
+      );
+    }
+  }, [pageContainerRef, selectedPallet, designSettings]);
 
   if (error) {
     return <div>Error loading site data</div>;
@@ -55,15 +67,16 @@ export default function SubdomainPage() {
   }
 
   return (
-    <GlobalSectionsProvider globalSections={siteData.globalSections}>
-      <MobileMenuProvider>
-        <div className={`${siteData.selectedPallet} page-container`}>
-          <Section
-            globalSections={siteData.globalSections} // This can still be passed directly if needed
-            currentPage={currentPage}
-          />
-        </div>
-      </MobileMenuProvider>
-    </GlobalSectionsProvider>
+    <MobileMenuProvider>
+      <div
+        className={`${siteData.selectedPallet} page-container`}
+        ref={pageContainerRef}
+      >
+        <Section
+          globalSections={siteData.globalSections}
+          currentPage={currentPage}
+        />
+      </div>
+    </MobileMenuProvider>
   );
 }

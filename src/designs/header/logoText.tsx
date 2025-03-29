@@ -1,3 +1,4 @@
+import { useSiteData } from "@/context/SiteDataContext";
 import { cn } from "@/lib/utils";
 import { HeaderLogo } from "@/types/sectionsTypes/header";
 import Link from "next/link";
@@ -9,6 +10,8 @@ interface LogoTextProps {
 }
 
 export const LogoText: React.FC<LogoTextProps> = ({ logo, logoClassNames }) => {
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
   const handleLinkClick = () => {
     if (logo.linkType === "internal" && logo.pageId) {
       // For internal links, let Next.js handle navigation through the Link component
@@ -60,7 +63,10 @@ export const LogoText: React.FC<LogoTextProps> = ({ logo, logoClassNames }) => {
   // Only use Link for internal links with a valid pageId
   if (logo.linkType === "internal" && logo.pageId) {
     return (
-      <Link className={logoClassNames} href={`${logo.link}`}>
+      <Link
+        className={logoClassNames}
+        href={homePageId === logo.pageId ? "/" : logo.link}
+      >
         <h5>{logo.text}</h5>
       </Link>
     );

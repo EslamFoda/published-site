@@ -1,3 +1,4 @@
+import { useSiteData } from "@/context/SiteDataContext";
 import { cn } from "@/lib/utils";
 import { Announcement as AnnouncementTypes } from "@/types/sectionsTypes/header";
 import Link from "next/link";
@@ -16,6 +17,8 @@ function Announcement({
   glassEffect,
   headerWidth,
 }: AnnouncementProps) {
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
   const outerAnnouncementClassNames = cn("w-full bg-background", {
     "rounded-t-md": announcement.position === "above" && headerFloat,
     "rounded-b-md": announcement.position === "below" && headerFloat,
@@ -89,7 +92,9 @@ function Announcement({
   if (announcement.linkType === "internal" && announcement.pageId) {
     return (
       <div className={outerAnnouncementClassNames}>
-        <Link href={`${announcement.link}`}>
+        <Link
+          href={homePageId === announcement.pageId ? "/" : announcement.link}
+        >
           <div className={innerAnnouncementClassNames}>
             <span className="text-sm">{announcement.text}</span>
           </div>

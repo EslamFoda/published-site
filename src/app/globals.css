@@ -91,7 +91,7 @@
     --radius: 0.5rem;
   }
 
-  .default-theme {
+  .light .default-theme {
     --text-color: 240 10% 3.9%;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -138,7 +138,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-rose {
+  .light .theme-rose {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --muted: 0 0% 93%;
@@ -161,7 +161,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-green {
+  .light .theme-green {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --muted: 0 0% 93%;
@@ -229,7 +229,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-orange {
+  .light .theme-orange {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --muted: 0 0% 93%;
@@ -273,7 +273,7 @@
     --ring: 263.4 70% 50.4%;
   }
 
-  .theme-violet {
+  .light .theme-violet {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --muted: 0 0% 93%;
@@ -293,7 +293,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
     --ring: 262.1 83.3% 57.8%;
-    --radius: 0.5rem;
+    --radius: 1.3rem;
   }
 
   .dark .theme-yellow {
@@ -318,7 +318,7 @@
     --ring: 35.5 91.7% 32.9%;
   }
 
-  .theme-yellow {
+  .light .theme-yellow {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --muted: 0 0% 93%;
@@ -369,7 +369,7 @@
     --radius: 0rem;
   }
 
-  .theme-blue {
+  .light .theme-blue {
     --background: 229 57% 100%;
     --foreground: 229 63% 4%;
     --muted: 229 12% 86%;
@@ -419,7 +419,7 @@
     --ring: 0 72.2% 50.6%;
   }
 
-  .theme-red {
+  .light .theme-red {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --muted: 0 0% 93%;
@@ -442,7 +442,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-vesper {
+  .light .theme-vesper {
     --background: 283 36% 98%;
     --foreground: 283 68% 2%;
     --muted: 283 13% 92%;
@@ -498,7 +498,7 @@
     --radius: 1.3rem;
   }
 
-  .theme-brain {
+  .light .theme-brain {
     --background: 0 0% 100%;
     --foreground: 222.22 47.37% 11.18%;
     --muted: 220 14.29% 95.88%;
@@ -554,7 +554,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-discord {
+  .light .theme-discord {
     --background: 334 62% 100%;
     --foreground: 334 55% 1%;
     --muted: 334 35% 95%;
@@ -610,7 +610,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-coffee {
+  .light .theme-coffee {
     --background: 0 0% 97.65%;
     --foreground: 0 0% 12.55%;
     --muted: 0 0% 93.73%;
@@ -666,7 +666,7 @@
     --radius: 1.3rem;
   }
 
-  .theme-yuzu {
+  .light .theme-yuzu {
     --background: 0 0% 97.65%;
     --foreground: 0 0% 12.55%;
     --muted: 0 0% 93.73%;
@@ -722,7 +722,7 @@
     --radius: 1.3rem;
   }
 
-  .theme-velvet {
+  .light .theme-velvet {
     --background: 155 36% 100%;
     --foreground: 155 71% 1%;
     --muted: 155 5% 95%;
@@ -778,7 +778,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-cool-blue {
+  .light .theme-cool-blue {
     --background: 181 30% 99%;
     --foreground: 181 69% 2%;
     --muted: 181 12% 91%;
@@ -834,7 +834,7 @@
     --radius: 0rem;
   }
 
-  .theme-pink {
+  .light .theme-pink {
     --background: 330 32% 99%;
     --foreground: 330 72% 0%;
     --muted: 330 40% 87%;
@@ -890,7 +890,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-claude {
+  .light .theme-claude {
     --background: 53.33 25.71% 93.14%;
     --foreground: 48 19.61% 20%;
     --muted: 44 29.41% 90%;
@@ -946,7 +946,7 @@
     --radius: 0.5rem;
   }
 
-  .theme-sizzling {
+  .light .theme-sizzling {
     --background: 188 66% 100%;
     --foreground: 188 76% 2%;
     --muted: 188 29% 95%;
@@ -1001,7 +1001,7 @@
     --chart-5: 188 47% 36%;
     --radius: 1.3rem;
   }
-  .theme-lavender {
+  .light .theme-lavender {
     --background: 267 35% 100%;
     --foreground: 267 69% 1%;
     --muted: 0 7% 91%;
@@ -1056,7 +1056,7 @@
     --chart-5: 267 100% 88%;
     --radius: 0.5rem;
   }
-  .theme-axiom {
+  .light .theme-axiom {
     --background: 0 0% 96%;
     --foreground: 0 0% 9%;
     --muted: 0 0% 85.66%;

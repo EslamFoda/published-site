@@ -1,3 +1,4 @@
+import { useSiteData } from "@/context/SiteDataContext";
 import { Link as LinkType, SubLink } from "@/types/sectionsTypes/header";
 import Link from "next/link";
 import React from "react";
@@ -7,6 +8,8 @@ interface HeaderLinkProps {
 }
 
 export const HeaderLink: React.FC<HeaderLinkProps> = ({ link }) => {
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
   const handleLinkClick = () => {
     if (link.linkType === "internal" && link.pageId) {
       // For internal links, let Next.js handle navigation through the Link component
@@ -51,7 +54,7 @@ export const HeaderLink: React.FC<HeaderLinkProps> = ({ link }) => {
   }
 
   return (
-    <Link href={link.link}>
+    <Link href={homePageId === link.pageId ? "/" : link.link}>
       <div>
         <span>{link.text}</span>
       </div>

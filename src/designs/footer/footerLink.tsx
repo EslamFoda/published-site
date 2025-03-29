@@ -2,17 +2,11 @@
 import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils"; // Adjust the import path based on where cn is defined in your project
+import { useSiteData } from "@/context/SiteDataContext";
+import { FooterSubLink } from "@/types/sectionsTypes/footer";
 
 interface FooterLinkProps {
-  subLink: {
-    id: string;
-    text: string;
-    link?: string;
-    externalLink?: string;
-    linkType: string;
-    openNewTab?: boolean;
-    pageId?: string;
-  };
+  subLink: FooterSubLink;
   isAccordion?: boolean; // Optional prop to distinguish accordion usage
   className?: string;
 }
@@ -22,6 +16,8 @@ export const FooterLink: React.FC<FooterLinkProps> = ({
   isAccordion = false,
   className,
 }) => {
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
   const handleLinkClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // Prevent accordion from toggling if in accordion context
     if (isAccordion) {
@@ -82,7 +78,7 @@ export const FooterLink: React.FC<FooterLinkProps> = ({
   }
 
   return (
-    <Link href={`${subLink.link}`}>
+    <Link href={homePageId === subLink.pageId ? "/" : subLink.link}>
       <div className={combinedClasses}>
         <span>{subLink.text}</span>
       </div>

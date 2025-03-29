@@ -11,9 +11,9 @@ import { useMediaQuery } from "react-responsive";
 import BackgroundImage from "@/components/shared/backgroundImage";
 import DesignLabel from "@/components/shared/label";
 import { SectionType } from "@/types/section";
-import { useGlobalSections } from "@/context/GlobalSectionsContext";
 import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
 import { SectionBackground } from "@/types/common";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface Design1Props {
   section: SectionType;
@@ -21,9 +21,9 @@ interface Design1Props {
 }
 
 function Design1({ section, sectionIndex }: Design1Props) {
-  const { globalSections } = useGlobalSections();
+  const { siteData } = useSiteData();
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
-  const globalHeader = globalSections?.find(
+  const globalHeader = siteData?.globalSections?.find(
     (section) => section.sectionName === "Header"
   );
   const headerStyle = globalHeader?.style as HeaderStyle;
