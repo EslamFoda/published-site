@@ -25,6 +25,7 @@ export default function SubdomainPage() {
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
   const subdomain = subdomainArray[0] || "fresh";
   const route = subdomainArray[1] || "home";
+  console.log(subdomain, "subdomain");
 
   const { data: siteData, error } = useSWR(subdomain, fetchSiteData, {
     revalidateOnFocus: false,
