@@ -53,7 +53,6 @@ export default function SubdomainPage() {
   const currentPage =
     siteData.pages.find((page: Page) => page.pageSettings.link === route) ||
     null;
-  console.log(currentPage, "currentPage");
 
   if (!currentPage) {
     return (

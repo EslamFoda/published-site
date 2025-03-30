@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { useParams } from "next/navigation";
 import { SiteDataProvider } from "@/context/SiteDataContext";
 import { SiteData } from "@/types/siteData";
+import Head from "next/head";
 
 const fetchSiteData = async (subdomain: string) => {
   const supabase = createClient();
@@ -28,7 +29,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const params = useParams();
-  console.log(params, "params");
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
   const subdomain = subdomainArray[0];
 
@@ -39,6 +39,13 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <title>{siteData?.settings.name || "Default Title"}</title>
+        <meta
+          name="description"
+          content={siteData?.settings.name || "Default description"}
+        />
+      </Head>
       <body>
         <SiteDataProvider siteData={siteData || null} error={error || null}>
           <FontLoader />

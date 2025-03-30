@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex flex-col h-screen">
           <div className="flex h-14 px-3 border-b border-muted-bg justify-between items-center">
             <ThemeToggle />
-            <button
+            <div
               className={cn(
                 "rounded-md flex items-center justify-center",
                 closeButtonClassName
@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               aria-label={closeButton ? undefined : "Close sidebar"}
             >
               {closeButton}
-            </button>
+            </div>
           </div>
           <div className="flex-1">{children}</div>
         </div>
