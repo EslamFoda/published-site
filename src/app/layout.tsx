@@ -39,14 +39,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <title>{siteData?.settings.name || "Default Title"}</title>
-        <meta
-          name="description"
-          content={siteData?.settings.name || "Default description"}
-        />
-      </Head>
       <body>
+        <Head>
+          <title>{siteData?.settings.name || "Default Title"}</title>
+          <meta
+            name="description"
+            content={siteData?.settings.name || "Default description"}
+          />
+        </Head>
         <SiteDataProvider siteData={siteData || null} error={error || null}>
           <FontLoader />
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
