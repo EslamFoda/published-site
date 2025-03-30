@@ -3,15 +3,12 @@ import React from "react";
 export async function generateMetadata({
   params,
 }: {
-  params: { subdomain?: string[] };
+  params: { subdomain?: string[] | undefined };
 }): Promise<Metadata> {
   const { subdomain } = await params;
   const siteName = subdomain?.[0];
   const pageName = subdomain?.[1];
   const pathname = `${siteName} ${pageName ? `- ${pageName}` : ""}`;
-  console.log(pageName, "pageName");
-
-  console.log(pathname, "Generated pathname");
 
   return {
     title: pathname || "Default Title",
