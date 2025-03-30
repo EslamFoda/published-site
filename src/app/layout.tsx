@@ -7,7 +7,11 @@ import { SiteData } from "@/types/siteData";
 import { ReactNode } from "react";
 import { headers } from "next/headers";
 
-async function getSiteData() {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const supabase = await createClient();
   const headersList = await headers();
   const host = headersList.get("host") || "";
@@ -19,24 +23,6 @@ async function getSiteData() {
     .eq("domainName", subdomain)
     .order("created_at", { ascending: false })
     .single();
-
-  return { siteData, error };
-}
-
-export async function generateMetadata() {
-  const { siteData } = await getSiteData();
-  return {
-    title: siteData?.settings?.name || "Default Title",
-    description: siteData?.settings?.name || "Default description",
-  };
-}
-
-export default async function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const { siteData, error } = await getSiteData();
 
   return (
     <html lang="en" suppressHydrationWarning>

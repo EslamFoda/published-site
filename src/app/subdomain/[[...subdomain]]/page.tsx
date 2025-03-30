@@ -5,23 +5,51 @@ import { MobileMenuProvider } from "@/context/MobileMenuContext";
 import { useSiteData } from "@/context/SiteDataContext";
 import { Page } from "@/types/pages";
 import { useParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 export default function SubdomainPage() {
   const params = useParams();
+  const pageContainerRef = useRef<HTMLDivElement>(null);
+  const subdomainArray = (params.subdomain as string[] | undefined) || [];
+  const subdomain = subdomainArray[0];
+  const route = subdomainArray[1] || "home";
+
   const { siteData, error } = useSiteData();
+  const designSettings = siteData?.designSettings;
+  const selectedPallet = siteData?.selectedPallet;
+
+  useEffect(() => {
+    if (pageContainerRef.current && designSettings) {
+      pageContainerRef.current.style.setProperty(
+        "--radius",
+        designSettings.borderRadius
+      );
+
+      if (selectedPallet === "custom") {
+        pageContainerRef.current.style.setProperty(
+          "--primary",
+          designSettings.colors.primary
+        );
+        pageContainerRef.current.style.setProperty(
+          "--primary-foreground",
+          designSettings.colors.primaryForGround
+        );
+      }
+      pageContainerRef.current.style.setProperty(
+        "--container-max-width",
+        designSettings.width.fullWidthPage
+          ? "100%"
+          : `${designSettings.width.pages}px`
+      );
+    }
+  }, [pageContainerRef, selectedPallet, designSettings]);
 
   if (error) {
-    return (
-      <div className="not-found">
-        <h1>404 - Site Not Found</h1>
-        <p>Sorry, the requested site could not be found.</p>
-      </div>
-    );
+    return <div>Error loading site data</div>;
   }
 
   if (!siteData) return null;
 
-  const route = params.subdomain?.[1] || "home";
   const currentPage =
     siteData.pages.find((page: Page) => page.pageSettings.link === route) ||
     null;
@@ -30,14 +58,19 @@ export default function SubdomainPage() {
     return (
       <div className="not-found">
         <h1>404 - Page Not Found</h1>
-        <p>Sorry, the page {route} could not be found.</p>
+        <p>
+          Sorry, the page {route} could not be found for {subdomain}.
+        </p>
       </div>
     );
   }
 
   return (
     <MobileMenuProvider>
-      <div className={`${siteData.selectedPallet} page-container`}>
+      <div
+        className={`${siteData.selectedPallet} page-container`}
+        ref={pageContainerRef}
+      >
         <Section
           globalSections={siteData.globalSections}
           currentPage={currentPage}
