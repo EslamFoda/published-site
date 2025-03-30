@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { SiteData } from "@/types/section";
 import { createClient } from "@/supabase/client";
+import { SiteData } from "@/types/siteData";
 
 interface SiteState {
   siteData: { [key: string]: SiteData | null };
