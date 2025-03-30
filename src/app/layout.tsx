@@ -7,11 +7,7 @@ import { SiteData } from "@/types/siteData";
 import { ReactNode } from "react";
 import { headers } from "next/headers";
 
-export default async function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+async function getSiteData() {
   const supabase = await createClient();
   const headersList = await headers();
   const host = headersList.get("host") || "";
@@ -23,6 +19,16 @@ export default async function RootLayout({
     .eq("domainName", subdomain)
     .order("created_at", { ascending: false })
     .single();
+
+  return { siteData, error };
+}
+
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const { siteData, error } = await getSiteData();
 
   return (
     <html lang="en" suppressHydrationWarning>
