@@ -6,14 +6,24 @@ import { FooterMobileLinks } from "./footerMobileLinks";
 import DesignButtons from "@/components/shared/designButtons";
 import { SectionType } from "@/types/section";
 import { iconMap } from "@/icons/socialIcons";
+import { LogoText } from "../header/logoText";
+import Logo from "../header/logo";
+import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface Design2Props {
   section: SectionType;
 }
 
 function Design2({ section }: Design2Props) {
-  // const { settings } = useAppSelector((state) => state.editor.present);
+  const { siteData } = useSiteData();
   const footerContent = section?.content as FooterContent;
+  const globalHeader = siteData?.globalSections?.find(
+    (section) => section.sectionName === "Header"
+  );
+  const headerStyle = globalHeader?.style as HeaderStyle;
+  const headerContent = globalHeader?.content as HeaderContent;
+  const { logo } = headerContent;
 
   // Function to handle social link clicks
   const handleSocialLinkClick = (link: string) => {
@@ -38,6 +48,9 @@ function Design2({ section }: Design2Props) {
     "flex flex-col gap-3": footerContent.links.length > 1,
     "flex flex-row gap-6 flex-wrap": footerContent.links.length === 1,
   });
+  const logoClassNames = cn("text-xl", {
+    "text-primary": headerStyle.designSettings.logoColor === "primary",
+  });
 
   return (
     <section className="container max-w-container  w-full py-12">
@@ -58,7 +71,19 @@ function Design2({ section }: Design2Props) {
             })}
           </div>
           <div className="space-y-4 lg:flex hidden flex-col basis-2/5  text-end items-end">
-            <h2>{"settings.name"}</h2>
+            {footerContent.siteLogo && (
+              <div>
+                <LogoText
+                  logo={headerContent.logo}
+                  logoClassNames={logoClassNames}
+                />
+                <Logo
+                  logoType={headerContent.logo.logoType}
+                  logoSize={headerStyle.designSettings.logoSize}
+                  logo={logo}
+                />
+              </div>
+            )}
             <div
               className="text-muted-foreground"
               dangerouslySetInnerHTML={{ __html: footerContent.text }}
@@ -84,7 +109,19 @@ function Design2({ section }: Design2Props) {
           })}
         </div>
         <div className="space-y-4 lg:hidden flex flex-col w-full text-end items-end">
-          <h2>{"settings.name"}</h2>
+          {footerContent.siteLogo && (
+            <div>
+              <LogoText
+                logo={headerContent.logo}
+                logoClassNames={logoClassNames}
+              />
+              <Logo
+                logoType={headerContent.logo.logoType}
+                logoSize={headerStyle.designSettings.logoSize}
+                logo={logo}
+              />
+            </div>
+          )}
           <div
             className="text-muted-foreground"
             dangerouslySetInnerHTML={{ __html: footerContent.text }}

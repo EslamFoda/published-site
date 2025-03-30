@@ -1,6 +1,8 @@
 "use client";
 
+import PageNotFound from "@/components/pageNotFound";
 import Section from "@/components/shared/section";
+import SiteNotExists from "@/components/siteNotExists";
 import { MobileMenuProvider } from "@/context/MobileMenuContext";
 import { useSiteData } from "@/context/SiteDataContext";
 import { Page } from "@/types/pages";
@@ -11,7 +13,7 @@ export default function SubdomainPage() {
   const params = useParams();
   const pageContainerRef = useRef<HTMLDivElement>(null);
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
-  const subdomain = subdomainArray[0];
+  const subdomain = subdomainArray[0] || "fresh";
   const route = subdomainArray[1] || "home";
 
   const { siteData, error } = useSiteData();
@@ -44,9 +46,7 @@ export default function SubdomainPage() {
     }
   }, [pageContainerRef, selectedPallet, designSettings]);
 
-  if (error) {
-    return <div>Error loading site data</div>;
-  }
+  if (error) return <SiteNotExists subdomain={subdomain} />;
 
   if (!siteData) return null;
 
@@ -54,16 +54,7 @@ export default function SubdomainPage() {
     siteData.pages.find((page: Page) => page.pageSettings.link === route) ||
     null;
 
-  if (!currentPage) {
-    return (
-      <div className="not-found">
-        <h1>404 - Page Not Found</h1>
-        <p>
-          Sorry, the page {route} could not be found for {subdomain}.
-        </p>
-      </div>
-    );
-  }
+  if (!currentPage) return <PageNotFound />;
 
   return (
     <MobileMenuProvider>

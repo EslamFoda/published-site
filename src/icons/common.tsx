@@ -168,3 +168,41 @@ export const MenuIcon5 = ({ className }: { className?: string }) => (
     ></path>
   </svg>
 );
+
+export const SiteNotExistIcon = () => {
+  return (
+    <svg
+      width="321"
+      height="101"
+      className="fill-muted"
+      viewBox="0 0 208 65"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M97.5 26h13v13h-13V26z"></path>
+      <path d="M110.5 13h13v13h-13V13zm-26 26h13v13h-13V39z"></path>
+      <path d="M71.5 13h13v39h-13V13z"></path>
+      <path d="M84.5 0h39v13h-39V0zm0 52h39v13h-39V52z"></path>
+      <path d="M123.5 13h13v39h-13V13zM13 26h13v13H13V26z"></path>
+      <path d="M26 13h13v13H26V13zM0 39h65v13H0V39z"></path>
+      <path d="M39 0h13v65H39V0zm117 26h13v13h-13V26z"></path>
+      <path d="M169 13h13v13h-13V13zm-26 26h65v13h-65V39z"></path>
+      <path d="M182 0h13v65h-13V0z"></path>
+    </svg>
+  );
+};
+
+export const LandingPageIcon = () => {
+  return (
+    <svg
+      width="17"
+      height="16"
+      viewBox="0 0 17 16"
+      fill="none"
+      className="fill-foreground group-hover:fill-muted"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15.5498 4.33236C15.5498 3.25393 14.687 2.49902 13.7164 2.49902C12.7458 2.49902 11.8831 3.36177 11.8831 4.33236C11.8831 5.41079 12.7458 6.16569 13.7164 6.16569C14.7948 6.16569 15.5498 5.30294 15.5498 4.33236Z"></path>
+      <path d="M6.04984 6.16569L0.916504 13.499H15.5832L12.6498 9.83236L10.4498 12.0324L6.04984 6.16569Z"></path>
+    </svg>
+  );
+};

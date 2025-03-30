@@ -1,5 +1,6 @@
 "use client";
 
+import { lazy } from "react";
 import useScrollParallax from "@/hooks/useScrollParallax";
 import { SectionType } from "@/types/section";
 import ProgressBar from "../progressBar";
@@ -9,19 +10,18 @@ import HeaderMobMenu from "../headerMobMenu";
 import { X } from "lucide-react";
 import { useMobileMenu } from "@/context/MobileMenuContext";
 import { Page } from "@/types/pages";
-import dynamic from "next/dynamic";
 
-const Banner = dynamic(() => import("@/designs/banner"));
-const Cards = dynamic(() => import("@/designs/cards"));
-const List = dynamic(() => import("@/designs/list"));
-const Accordion = dynamic(() => import("@/designs/accordion"));
-const Testimonials = dynamic(() => import("@/designs/testimonials"));
-const Gallery = dynamic(() => import("@/designs/gallery"));
-const Logos = dynamic(() => import("@/designs/logos"));
-const FluidPreview = dynamic(() => import("@/designs/fluidPreview"));
-const Pricing = dynamic(() => import("@/designs/pricing"));
-const Header = dynamic(() => import("@/designs/header"));
-const Footer = dynamic(() => import("@/designs/footer"));
+const Banner = lazy(() => import("@/designs/banner"));
+const Cards = lazy(() => import("@/designs/cards"));
+const List = lazy(() => import("@/designs/list"));
+const Accordion = lazy(() => import("@/designs/accordion"));
+const Testimonials = lazy(() => import("@/designs/testimonials"));
+const Gallery = lazy(() => import("@/designs/gallery"));
+const Logos = lazy(() => import("@/designs/logos"));
+const FluidPreview = lazy(() => import("@/designs/fluidPreview"));
+const Pricing = lazy(() => import("@/designs/pricing"));
+const Header = lazy(() => import("@/designs/header"));
+const Footer = lazy(() => import("@/designs/footer"));
 
 const Section: React.FC<{
   globalSections: SectionType[] | undefined;
@@ -76,7 +76,8 @@ const Section: React.FC<{
       )}
       {currentPage?.sections?.map((section, i) => {
         if (!section) return null;
-        const SectionComponent = sectionsMapper[section.sectionName as keyof typeof sectionsMapper];
+        const SectionComponent =
+          sectionsMapper[section.sectionName as keyof typeof sectionsMapper];
 
         return (
           <div key={section.id} className="relative">

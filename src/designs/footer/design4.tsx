@@ -6,13 +6,23 @@ import { FooterMobileLinks } from "./footerMobileLinks";
 import DesignButtons from "@/components/shared/designButtons";
 import { SectionType } from "@/types/section";
 import { iconMap } from "@/icons/socialIcons";
+import { LogoText } from "../header/logoText";
+import Logo from "../header/logo";
+import { useSiteData } from "@/context/SiteDataContext";
+import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
 interface Design4Props {
   section: SectionType;
 }
 
 function Design4({ section }: Design4Props) {
-  // const { settings } = useAppSelector((state) => state.editor.present);
+  const { siteData } = useSiteData();
   const footerContent = section?.content as FooterContent;
+  const globalHeader = siteData?.globalSections?.find(
+    (section) => section.sectionName === "Header"
+  );
+  const headerStyle = globalHeader?.style as HeaderStyle;
+  const headerContent = globalHeader?.content as HeaderContent;
+  const { logo } = headerContent;
 
   // Function to handle social link clicks
   const handleSocialLinkClick = (link: string) => {
@@ -38,6 +48,9 @@ function Design4({ section }: Design4Props) {
       footerContent.links.length > 1,
     "flex items-center justify-center flex-row gap-6 flex-wrap":
       footerContent.links.length === 1,
+  });
+  const logoClassNames = cn("text-xl", {
+    "text-primary": headerStyle.designSettings.logoColor === "primary",
   });
 
   return (
@@ -84,7 +97,19 @@ function Design4({ section }: Design4Props) {
               buttons={footerContent.buttons}
               btnClassNames="justify-center"
             />
-            <h2>{"settings.name"}</h2>
+            {footerContent.siteLogo && (
+              <div className="flex items-center justify-center">
+                <LogoText
+                  logo={headerContent.logo}
+                  logoClassNames={logoClassNames}
+                />
+                <Logo
+                  logoType={headerContent.logo.logoType}
+                  logoSize={headerStyle.designSettings.logoSize}
+                  logo={logo}
+                />
+              </div>
+            )}
           </div>
         </div>
         <hr />

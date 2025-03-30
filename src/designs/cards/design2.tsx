@@ -20,6 +20,8 @@ import BackgroundImage from "@/components/shared/backgroundImage";
 import SectionHeader from "@/components/shared/sectionHeader";
 import { Spacing } from "@/types/common";
 import { SectionType } from "@/types/section";
+import { useRouter } from "next/navigation";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface CardProps {
   card: CardType;
@@ -50,9 +52,41 @@ const Card: React.FC<CardProps> = ({
   spacing,
   isDesktop,
 }) => {
+  const router = useRouter();
+  const { siteData } = useSiteData();
+  const homePageId = siteData?.settings.homePage;
+  const handleCardClick = (card: CardType) => {
+    if (card.linkType === "internal" && card.pageId) {
+      // Use router.push for internal Next.js navigation
+      router.push(homePageId === card.pageId ? "/" : card.link);
+      return;
+    }
+
+    if (card.linkType === "external" && card.externalLink) {
+      let finalLink = card.externalLink;
+
+      // Ensure the link has http/https prefix
+      if (
+        !finalLink.startsWith("http://") &&
+        !finalLink.startsWith("https://")
+      ) {
+        finalLink = "https://" + finalLink;
+      }
+
+      // Open in new tab or same tab based on openNewTab prop
+      if (card.openNewTab) {
+        window.open(finalLink, "_blank", "noopener,noreferrer");
+      } else {
+        window.location.href = finalLink;
+      }
+    }
+  };
   return (
     <div
       key={card.id || index}
+      className={cn(cardClassNames, {
+        "cursor-pointer": card.link || card.externalLink,
+      })}
       style={{
         minHeight: isDesktop ? height.desktop : height.mobile,
         backgroundImage: `url(${card.image})`,
@@ -60,7 +94,7 @@ const Card: React.FC<CardProps> = ({
         backgroundSize: "cover",
         padding: isDesktop ? spacing.padding.desktop : spacing.padding.mobile,
       }}
-      className={cardClassNames}
+      onClick={() => handleCardClick(card)}
     >
       <div
         className={cn(cardContentClasses, {

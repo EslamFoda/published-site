@@ -6,13 +6,23 @@ import { FooterMobileLinks } from "./footerMobileLinks";
 import DesignButtons from "@/components/shared/designButtons";
 import { SectionType } from "@/types/section";
 import { iconMap } from "@/icons/socialIcons";
+import { LogoText } from "../header/logoText";
+import Logo from "../header/logo";
+import { useSiteData } from "@/context/SiteDataContext";
+import { HeaderContent, HeaderStyle } from "@/types/sectionsTypes/header";
 interface Design3Props {
   section: SectionType;
 }
 
 function Design3({ section }: Design3Props) {
-  // const { settings } = useAppSelector((state) => state.editor.present);
+  const { siteData } = useSiteData();
   const footerContent = section?.content as FooterContent;
+  const globalHeader = siteData?.globalSections?.find(
+    (section) => section.sectionName === "Header"
+  );
+  const headerStyle = globalHeader?.style as HeaderStyle;
+  const headerContent = globalHeader?.content as HeaderContent;
+  const { logo } = headerContent;
 
   // Function to handle social link clicks
   const handleSocialLinkClick = (link: string) => {
@@ -39,13 +49,28 @@ function Design3({ section }: Design3Props) {
     "flex items-center justify-center flex-row gap-6 flex-wrap":
       footerContent.links.length === 1,
   });
+  const logoClassNames = cn("text-xl", {
+    "text-primary": headerStyle.designSettings.logoColor === "primary",
+  });
 
   return (
     <section className="container max-w-container  w-full py-12">
       <div className="space-y-6">
         <div className="flex flex-col items-center text-center gap-12 justify-center">
           <div className="space-y-4 ">
-            <h2>{"settings.name"}</h2>
+            {footerContent.siteLogo && (
+              <div className="flex items-center justify-center">
+                <LogoText
+                  logo={headerContent.logo}
+                  logoClassNames={logoClassNames}
+                />
+                <Logo
+                  logoType={headerContent.logo.logoType}
+                  logoSize={headerStyle.designSettings.logoSize}
+                  logo={logo}
+                />
+              </div>
+            )}
             <div
               className="text-muted-foreground max-w-3xl"
               dangerouslySetInnerHTML={{ __html: footerContent.text }}
