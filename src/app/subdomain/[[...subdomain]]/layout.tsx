@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+import React from "react";
 export async function generateMetadata({
   params,
 }: {
@@ -6,7 +8,7 @@ export async function generateMetadata({
   const { subdomain } = await params;
   const siteName = subdomain?.[0];
   const pageName = subdomain?.[1];
-  const pathname = `${siteName} ${pageName ? `- ${pageName}`:""}`;
+  const pathname = `${siteName} ${pageName ? `- ${pageName}` : ""}`;
   console.log(pageName, "pageName");
 
   console.log(pathname, "Generated pathname");
@@ -16,9 +18,6 @@ export async function generateMetadata({
     description: "Default description",
   };
 }
-
-import { Metadata } from "next";
-import React from "react";
 
 function Layout({
   children,
