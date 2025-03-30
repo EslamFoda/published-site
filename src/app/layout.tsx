@@ -1,53 +1,47 @@
-"use client";
-
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
 import FontLoader from "@/components/shared/fontLoader";
-import { createClient } from "@/supabase/client";
-import useSWR from "swr";
-import { useParams } from "next/navigation";
+import { createClient } from "@/supabase/server";
 import { SiteDataProvider } from "@/context/SiteDataContext";
 import { SiteData } from "@/types/siteData";
-import Head from "next/head";
+import { ReactNode } from "react";
+import { headers } from "next/headers";
 
-const fetchSiteData = async (subdomain: string) => {
-  const supabase = createClient();
-  const { data, error } = await supabase
+async function getSiteData() {
+  const supabase = await createClient();
+  const headersList = await headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+
+  const { data: siteData, error } = await supabase
     .from("published_sites")
     .select()
     .eq("domainName", subdomain)
     .order("created_at", { ascending: false })
     .single();
 
-  if (error || !data) throw new Error("No site data found");
-  return data as SiteData;
-};
+  return { siteData, error };
+}
 
-export default function RootLayout({
+export async function generateMetadata() {
+  const { siteData } = await getSiteData();
+  return {
+    title: siteData?.settings?.name || "Default Title",
+    description: siteData?.settings?.name || "Default description",
+  };
+}
+
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const params = useParams();
-  const subdomainArray = (params.subdomain as string[] | undefined) || [];
-  const subdomain = subdomainArray[0];
-
-  const { data: siteData, error } = useSWR(subdomain, fetchSiteData, {
-    revalidateOnFocus: false,
-    dedupingInterval: 60000,
-  });
+}: {
+  children: ReactNode;
+}) {
+  const { siteData, error } = await getSiteData();
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Head>
-          <title>{siteData?.settings.name || "Default Title"}</title>
-          <meta
-            name="description"
-            content={siteData?.settings.name || "Default description"}
-          />
-        </Head>
-        <SiteDataProvider siteData={siteData || null} error={error || null}>
+        <SiteDataProvider siteData={siteData as SiteData} error={error}>
           <FontLoader />
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <main>{children}</main>

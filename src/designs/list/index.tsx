@@ -5,13 +5,15 @@ import { SectionType } from "@/types/section";
 
 interface ListProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function List({ section }: ListProps) {
   const designs = {
     design1: Design1,
     design2: Design2,
   };
-  const ListSection = designs[section?.style.designName as keyof typeof designs];
+  const ListSection =
+    designs[section?.style.designName as keyof typeof designs];
   return <ListSection section={section} />;
 }
 

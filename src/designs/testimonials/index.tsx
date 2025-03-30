@@ -5,6 +5,7 @@ import { SectionType } from "@/types/section";
 
 interface TestimonialProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function Testimonials({ section }: TestimonialProps) {
   const designs = {

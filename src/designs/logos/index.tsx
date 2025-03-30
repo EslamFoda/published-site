@@ -4,13 +4,15 @@ import { SectionType } from "@/types/section";
 
 interface LogosProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function Logos({ section }: LogosProps) {
   const designs = {
     design1: Design1,
   };
 
-  const LogoSection = designs[section?.style.designName as keyof typeof designs];
+  const LogoSection =
+    designs[section?.style.designName as keyof typeof designs];
   return <LogoSection section={section} />;
 }
 

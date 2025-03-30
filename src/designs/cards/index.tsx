@@ -5,6 +5,7 @@ import { SectionType } from "@/types/section";
 
 interface CardsProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function Cards({ section }: CardsProps) {
   const designs = {

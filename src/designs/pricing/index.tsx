@@ -5,6 +5,7 @@ import { SectionType } from "@/types/section";
 
 interface PricingProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function Pricing({ section }: PricingProps) {
   const designs = {

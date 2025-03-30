@@ -4,6 +4,7 @@ import { SectionType } from "@/types/section";
 
 interface GalleryProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function Gallery({ section }: GalleryProps) {
   const designs = {

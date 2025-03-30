@@ -11,6 +11,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface FluidPreviewProps {
   section: SectionType;
+  sectionIndex: number;
 }
 
 const FluidPreview: React.FC<FluidPreviewProps> = ({ section }) => {

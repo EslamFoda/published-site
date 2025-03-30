@@ -8,6 +8,10 @@ function FontLoader() {
 
   return (
     <>
+      {/* <head>
+        <title>{siteData?.settings.name}</title>
+        <meta name="description" content={siteData?.settings.name} />
+      </head> */}
       {/* Body Font Face Definition */}
       {fonts?.bodyFont.fontFamilyUrl && (
         <style type="text/css">

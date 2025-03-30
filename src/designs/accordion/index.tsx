@@ -4,6 +4,7 @@ import { SectionType } from "@/types/section";
 
 interface AccordionProps {
   section: SectionType;
+  sectionIndex: number;
 }
 function Accordion({ section }: AccordionProps) {
   const designs = {
