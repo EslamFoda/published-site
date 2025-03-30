@@ -20,11 +20,12 @@ export async function generateMetadata({
 }
 
 // Define the Layout component
-function Layout({
-  children,
-}: Readonly<{
+interface LayoutProps {
   children: React.ReactNode;
-}>) {
+  params: { subdomain?: string[] };
+}
+
+function Layout({ children }: LayoutProps) {
   return <div>{children}</div>;
 }
 
