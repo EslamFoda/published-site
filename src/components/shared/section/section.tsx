@@ -1,16 +1,6 @@
 "use client";
 
-import Accordion from "@/designs/accordion";
-import Banner from "@/designs/banner";
-import Cards from "@/designs/cards";
-import FluidPreview from "@/designs/fluidPreview";
-import Footer from "@/designs/footer";
-import Gallery from "@/designs/gallery";
-import Header from "@/designs/header";
-import List from "@/designs/list";
-import Logos from "@/designs/logos";
-import Pricing from "@/designs/pricing";
-import Testimonials from "@/designs/testimonials";
+import { lazy } from "react";
 import useScrollParallax from "@/hooks/useScrollParallax";
 import { SectionType } from "@/types/section";
 import ProgressBar from "../progressBar";
@@ -20,6 +10,18 @@ import HeaderMobMenu from "../headerMobMenu";
 import { X } from "lucide-react";
 import { useMobileMenu } from "@/context/MobileMenuContext";
 import { Page } from "@/types/pages";
+
+const Banner = lazy(() => import("@/designs/banner"));
+const Cards = lazy(() => import("@/designs/cards"));
+const List = lazy(() => import("@/designs/list"));
+const Accordion = lazy(() => import("@/designs/accordion"));
+const Testimonials = lazy(() => import("@/designs/testimonials"));
+const Gallery = lazy(() => import("@/designs/gallery"));
+const Logos = lazy(() => import("@/designs/logos"));
+const FluidPreview = lazy(() => import("@/designs/fluidPreview"));
+const Pricing = lazy(() => import("@/designs/pricing"));
+const Header = lazy(() => import("@/designs/header"));
+const Footer = lazy(() => import("@/designs/footer"));
 
 const Section: React.FC<{
   globalSections: SectionType[] | undefined;
@@ -39,10 +41,9 @@ const Section: React.FC<{
   const headerContent = globalHeader?.content as HeaderContent;
 
   const sectionsMapper: {
-    [key: string]: React.ComponentType<{
-      section: SectionType;
-      sectionIndex: number;
-    }>;
+    [key: string]: React.LazyExoticComponent<
+      React.ComponentType<{ section: SectionType; sectionIndex: number }>
+    >;
   } = {
     Banner,
     Cards,
@@ -55,10 +56,7 @@ const Section: React.FC<{
     Pricing,
   };
 
-  const globalSectionMapper = {
-    Header,
-    Footer,
-  };
+  const globalSectionMapper = { Header, Footer };
 
   const GlobalHeaderSection = globalSectionMapper["Header"];
   const GlobalFooterSection = globalSectionMapper["Footer"];

@@ -12,7 +12,7 @@ export default function SubdomainPage() {
   const pageContainerRef = useRef<HTMLDivElement>(null);
   const subdomainArray = (params.subdomain as string[] | undefined) || [];
   const subdomain = subdomainArray[0];
-  const route = subdomainArray[1] || "/";
+  const route = subdomainArray[1] || "home";
 
   const { siteData, error } = useSiteData();
   const designSettings = siteData?.designSettings;
@@ -53,6 +53,7 @@ export default function SubdomainPage() {
   const currentPage =
     siteData.pages.find((page: Page) => page.pageSettings.link === route) ||
     null;
+  console.log(currentPage, "currentPage");
 
   if (!currentPage) {
     return (

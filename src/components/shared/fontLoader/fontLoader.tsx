@@ -1,30 +1,13 @@
 "use client";
 import { useSiteData } from "@/context/SiteDataContext";
 import React from "react";
-import Head from "next/head";
 
 function FontLoader() {
   const { siteData } = useSiteData();
   const fonts = siteData?.designSettings.fonts;
 
-  // Extract domains from font URLs
-  const bodyFontDomain = fonts?.bodyFont.fontFamilyUrl
-    ? new URL(fonts.bodyFont.fontFamilyUrl).origin
-    : null;
-  const titleFontDomain = fonts?.titleFont.fontFamilyUrl
-    ? new URL(fonts.titleFont.fontFamilyUrl).origin
-    : null;
-
   return (
     <>
-      {/* Resource Hints */}
-      <Head>
-        {bodyFontDomain && <link rel="preconnect" href={bodyFontDomain} />}
-        {titleFontDomain && titleFontDomain !== bodyFontDomain && (
-          <link rel="preconnect" href={titleFontDomain} />
-        )}
-      </Head>
-
       {/* Body Font Face Definition */}
       {fonts?.bodyFont.fontFamilyUrl && (
         <style type="text/css">
