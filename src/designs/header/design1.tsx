@@ -195,7 +195,7 @@ function Design1({ section }: Design1Props) {
               </nav>
             </div>
             <div className="hidden lg:flex items-center gap-3">
-              <DesignButtons buttons={headerContent.buttons} reverse />
+              <DesignButtons buttons={headerContent.buttons} reverse  btnClassNames="min-w-24" />
               <div
                 className="cursor-pointer"
                 onClick={() => setMobMenuOpen(true)}
@@ -292,7 +292,7 @@ function Design1({ section }: Design1Props) {
           </nav>
         </div>
         <div className="hidden lg:flex items-center gap-3">
-          <DesignButtons buttons={headerContent.buttons} reverse />
+          <DesignButtons buttons={headerContent.buttons} reverse  btnClassNames="min-w-24" />
           <div className="cursor-pointer" onClick={() => setMobMenuOpen(true)}>
             <HeaderMenu options={headerContent.options} />
           </div>
