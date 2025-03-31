@@ -14,6 +14,12 @@ export interface ListItem {
   text: string;
   icon: string;
   link: string;
+  pageId: string;
+  linkType: "internal" | "external";
+  externalLink: string;
+  openNewTab: boolean;
+  image: string;
+  imageId: string;
 }
 
 export interface ListContent {
