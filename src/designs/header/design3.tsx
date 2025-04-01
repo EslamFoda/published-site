@@ -14,12 +14,15 @@ import { LogoText } from "./logoText";
 import Announcement from "./announcement";
 import HeaderMenu from "./headerMenu";
 import { SectionType } from "@/types/section";
+import { useMobileMenu } from "@/context/MobileMenuContext";
 
 interface Design3Props {
   section: SectionType;
 }
 
 function Design3({ section }: Design3Props) {
+  const { setMobMenuOpen } = useMobileMenu();
+
   const headerContent = section?.content as HeaderContent;
   const headerStyle = section?.style as HeaderStyle;
   const { sticky, float, autoHide, width, shadow, glass } =
@@ -197,11 +200,17 @@ function Design3({ section }: Design3Props) {
                   reverse
                   btnClassNames="min-w-24"
                 />
-                <div className="cursor-pointer">
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setMobMenuOpen(true)}
+                >
                   <HeaderMenu options={headerContent.options} />
                 </div>
               </div>
-              <div className="block lg:hidden cursor-pointer">
+              <div
+                className="block lg:hidden cursor-pointer"
+                onClick={() => setMobMenuOpen(true)}
+              >
                 <HeaderMenu options={headerContent.options} />
               </div>
             </div>
@@ -292,11 +301,17 @@ function Design3({ section }: Design3Props) {
               reverse
               btnClassNames="min-w-24"
             />
-            <div className="cursor-pointer">
+            <div
+              className="cursor-pointer"
+              onClick={() => setMobMenuOpen(true)}
+            >
               <HeaderMenu options={headerContent.options} />
             </div>
           </div>
-          <div className="block lg:hidden cursor-pointer">
+          <div
+            className="block lg:hidden cursor-pointer"
+            onClick={() => setMobMenuOpen(true)}
+          >
             <HeaderMenu options={headerContent.options} />
           </div>
         </div>

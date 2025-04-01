@@ -14,12 +14,14 @@ import { LogoText } from "./logoText";
 import Announcement from "./announcement";
 import HeaderMenu from "./headerMenu";
 import { SectionType } from "@/types/section";
+import { useMobileMenu } from "@/context/MobileMenuContext";
 
 interface Design4Props {
   section: SectionType;
 }
 
 function Design4({ section }: Design4Props) {
+  const { setMobMenuOpen } = useMobileMenu();
   const headerContent = section?.content as HeaderContent;
   const headerStyle = section?.style as HeaderStyle;
   const { sticky, float, autoHide, width, shadow, glass } =
@@ -196,11 +198,17 @@ function Design4({ section }: Design4Props) {
                 reverse
                 btnClassNames="min-w-24"
               />
-              <div className="cursor-pointer">
+              <div
+                className="cursor-pointer"
+                onClick={() => setMobMenuOpen(true)}
+              >
                 <HeaderMenu options={headerContent.options} />
               </div>
             </div>
-            <div className="block lg:hidden cursor-pointer justify-self-end">
+            <div
+              className="block lg:hidden cursor-pointer justify-self-end"
+              onClick={() => setMobMenuOpen(true)}
+            >
               <HeaderMenu options={headerContent.options} />
             </div>
           </div>
@@ -289,11 +297,14 @@ function Design4({ section }: Design4Props) {
             reverse
             btnClassNames="min-w-24"
           />
-          <div className="cursor-pointer">
+          <div className="cursor-pointer" onClick={() => setMobMenuOpen(true)}>
             <HeaderMenu options={headerContent.options} />
           </div>
         </div>
-        <div className="block lg:hidden cursor-pointer justify-self-end">
+        <div
+          className="block lg:hidden cursor-pointer justify-self-end"
+          onClick={() => setMobMenuOpen(true)}
+        >
           <HeaderMenu options={headerContent.options} />
         </div>
       </div>
