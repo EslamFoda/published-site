@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <ThemeToggle />
             <div
               className={cn(
-                "rounded-md flex items-center justify-center",
+                "rounded-md flex items-center justify-center cursor-pointer",
                 closeButtonClassName
               )}
               onClick={onClose}
