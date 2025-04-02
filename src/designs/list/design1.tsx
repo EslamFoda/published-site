@@ -69,7 +69,7 @@ function Design1({ section }: DesignProps) {
   );
   const texClassName = cn("text-muted-foreground text-sm");
   const gridClassNames = cn(
-    "grid items-start",
+    "grid items-start group pointer-events-none",
     grid.desktop === 3 && "lg:grid-cols-3",
     grid.desktop === 2 && "lg:grid-cols-2",
     grid.desktop === 1 && "lg:grid-cols-1",
@@ -77,7 +77,7 @@ function Design1({ section }: DesignProps) {
     grid.mobile === 1 && "grid-cols-1"
   );
 
-  const listItemClassNames = cn("flex gap-5 gap-y-3  rounded-md", {
+  const listItemClassNames = cn("flex gap-5 gap-y-3 rounded-md group-hover:brightness-[0.8] hover:!brightness-110 pointer-events-auto transition-all", {
     "bg-muted": background,
     "outline outline-[1px] outline-muted": border,
     "bg-background": bgMuted || bgPrimary,

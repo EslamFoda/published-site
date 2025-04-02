@@ -188,7 +188,7 @@ function Design2({ section }: DesignProps) {
     "text-foreground": glassEffect,
   });
   const gridClassNames = cn(
-    "grid",
+    "grid group pointer-events-none",
     grid.desktop === 3 && "lg:grid-cols-3",
     grid.desktop === 2 && "lg:grid-cols-2",
     grid.desktop === 1 && "lg:grid-cols-1",
@@ -197,7 +197,7 @@ function Design2({ section }: DesignProps) {
   );
 
   const cardClassNames = cn(
-    "flex flex-col gap-2 rounded-md relative bg-muted",
+    "flex flex-col gap-2 rounded-md relative bg-muted group-hover:brightness-[0.8] hover:!brightness-110 pointer-events-auto transition-all",
     (bgMuted || bgPrimary) && "bg-background",
     layoutV2 === "top" && "justify-start",
     layoutV2 === "center" && "justify-center",

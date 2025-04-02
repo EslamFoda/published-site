@@ -213,7 +213,7 @@ function Design1({ section }: DesignProps) {
     layout === "bottom" && "order-2"
   );
   const gridClassNames = cn(
-    "grid",
+    "grid group pointer-events-none",
     grid.desktop === 3 && "lg:grid-cols-3",
     grid.desktop === 2 && "lg:grid-cols-2",
     grid.desktop === 1 && "lg:grid-cols-1",
@@ -222,7 +222,7 @@ function Design1({ section }: DesignProps) {
   );
 
   const cardClassNames = cn(
-    "flex flex-col gap-2 rounded-md",
+    "flex flex-col gap-2 rounded-md group-hover:brightness-[0.8] hover:!brightness-110 pointer-events-auto transition-all",
     cardBackground && "bg-muted",
     cardBorder && "outline outline-[1px] outline-muted",
     bgMuted && "bg-background"

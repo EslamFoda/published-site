@@ -53,7 +53,7 @@ function Design1({ section }: DesignProps) {
       ]
     : [];
 
-  const gridClassNames = cn("grid", {
+  const gridClassNames = cn("grid group pointer-events-none", {
     "lg:grid-cols-10": grid.desktop === 10,
     "lg:grid-cols-9": grid.desktop === 9,
     "lg:grid-cols-8": grid.desktop === 8,
@@ -72,7 +72,7 @@ function Design1({ section }: DesignProps) {
   });
 
   const cardClassNames = cn(
-    "flex flex-col  gap-2 rounded-md relative p-5 bg-muted p-5",
+    "flex flex-col  gap-2 rounded-md relative p-5 bg-muted p-5 group-hover:brightness-[0.8] hover:!brightness-110 pointer-events-auto transition-all",
     bgMuted && "bg-background"
   );
 

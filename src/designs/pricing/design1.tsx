@@ -54,7 +54,7 @@ function Design1({ section }: DesignProps) {
   });
 
   const subItemClassNames = cn(
-    "flex flex-col gap-5 gap-y-3 relative rounded-md overflow-hidden",
+    "flex flex-col gap-5 gap-y-3 relative rounded-md overflow-hidden group-hover:brightness-[0.8] hover:!brightness-110 pointer-events-auto transition-all",
     {
       "bg-muted": background,
       "outline outline-[1px] outline-muted": border,
@@ -184,7 +184,7 @@ function Design1({ section }: DesignProps) {
               )}
             </div>
             <div
-              className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
+              className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] group pointer-events-none"
               style={{
                 gap: isDesktop ? spacing.gap.desktop : spacing.gap.mobile,
               }}

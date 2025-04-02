@@ -44,7 +44,7 @@ function Design1({ section }: DesignProps) {
       leftTitlePosition,
   });
 
-  const accordionItemClassNames = cn("p-5 py-2 rounded-md", {
+  const accordionItemClassNames = cn("p-5 py-2 rounded-md group-hover:brightness-[0.8] hover:!brightness-110 pointer-events-auto transition-all", {
     "bg-muted": background,
     "outline outline-[1px] outline-muted": border,
     "bg-background": bgMuted || bgPrimary,
@@ -101,7 +101,7 @@ function Design1({ section }: DesignProps) {
             <div className="md:col-span-2">
               <Accordion
                 type="multiple"
-                className="w-full flex flex-col"
+                className="w-full flex flex-col group pointer-events-none"
                 style={{
                   gap: isDesktop ? spacing.gap.desktop : spacing.gap.mobile,
                 }}
