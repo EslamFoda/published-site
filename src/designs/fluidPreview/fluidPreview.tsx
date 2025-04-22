@@ -25,40 +25,39 @@ const FluidPreview: React.FC<FluidPreviewProps> = ({ section }) => {
   });
 
   return (
-    <div>
-      <div id={`fluid-grid-container-${section?.id}`}>
-        <ResponsiveGridLayout
-          layouts={fluidContent.gridLayout}
-          breakpoints={breakpoints}
-          cols={gridSettings.cols}
-          rowHeight={gridSettings.rowHeight}
-          margin={gridSettings.padding}
-          isBounded
-          style={{
-            minHeight: isLg
-              ? fluidSectionStyles.minHeights.lg
-              : isMd
-              ? fluidSectionStyles.minHeights.md
-              : fluidSectionStyles.minHeights.xs,
-            background: "transparent",
-          }}
-          containerPadding={[0, 0]}
-          compactType={null}
-          allowOverlap={true}
-          preventCollision={false}
-          isDroppable={false} // Disable dropping while editing
-          isDraggable={false} // Disable dragging while editing
-          isResizable={false} // Optionally disable resizing while editing
-        >
-          {fluidContent.gridCards.map((card) => (
-            <div key={card.i} className="relative rounded-md overflow-hidden">
-              {renderCardContent({
-                card,
-              })}
-            </div>
-          ))}
-        </ResponsiveGridLayout>
-      </div>
+    <div id={`fluid-grid-container-${section?.id}`}>
+      <ResponsiveGridLayout
+        className="container max-w-container"
+        layouts={fluidContent.gridLayout}
+        breakpoints={breakpoints}
+        cols={gridSettings.cols}
+        rowHeight={gridSettings.rowHeight}
+        margin={gridSettings.padding}
+        isBounded
+        style={{
+          minHeight: isLg
+            ? fluidSectionStyles.minHeights.lg
+            : isMd
+            ? fluidSectionStyles.minHeights.md
+            : fluidSectionStyles.minHeights.xs,
+          background: "transparent",
+        }}
+        containerPadding={[0, 0]}
+        compactType={null}
+        allowOverlap={true}
+        preventCollision={false}
+        isDroppable={false} // Disable dropping while editing
+        isDraggable={false} // Disable dragging while editing
+        isResizable={false} // Optionally disable resizing while editing
+      >
+        {fluidContent.gridCards.map((card) => (
+          <div key={card.i} className="relative rounded-md overflow-hidden">
+            {renderCardContent({
+              card,
+            })}
+          </div>
+        ))}
+      </ResponsiveGridLayout>
     </div>
   );
 };
