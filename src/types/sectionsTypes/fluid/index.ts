@@ -20,6 +20,13 @@ export interface FluidStyle {
   };
 }
 
+export interface CornerRadius {
+  topLeft?: number;
+  topRight?: number;
+  bottomLeft?: number;
+  bottomRight?: number;
+}
+
 export type ButtonDisplay = "Text only" | "Icon only" | "Text and icon";
 
 export type ButtonAlignment = "start" | "center" | "end";
@@ -62,6 +69,18 @@ export interface FluidTextSettings {
   color: string;
 }
 
+export interface FluidBoxSettings {
+  boxDesign: string;
+  bgColor: string;
+  border?: {
+    color?: string;
+    width?: number;
+  };
+  corners?: CornerRadius;
+  blur?: number;
+  glassEffect?: boolean;
+}
+
 export interface GridCardButton {
   i: string;
   content: string;
@@ -91,5 +110,19 @@ export interface GridCardText {
   zIndex: number;
 }
 
+export interface GridCardBox {
+  i: string;
+  content: string;
+  settings: FluidBoxSettings;
+  w: number;
+  h: number;
+  type: "box"; // Discriminator
+  zIndex: number;
+}
+
 // Union of GridCard types
-export type GridCard = GridCardButton | GridCardImage | GridCardText;
+export type GridCard =
+  | GridCardButton
+  | GridCardImage
+  | GridCardText
+  | GridCardBox;
