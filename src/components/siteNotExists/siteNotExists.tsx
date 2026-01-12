@@ -15,7 +15,7 @@ function SiteNotExists({ subdomain }: { subdomain: string }) {
           className="flex flex-col gap-3 items-center justify-center p-3 px-6 border w-56 rounded-md group hover:bg-muted cursor-pointer"
           onClick={() => {
             window.open(
-              "https://vixx-builder.vercel.app/",
+              "https://builder.vixx.site/",
               "_blank",
               "noopener,noreferrer"
             );
